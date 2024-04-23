@@ -1,0 +1,23 @@
+{% extends 'admin_dashboard.html' %}
+{% block title %}Users{% endblock %}
+{% block content %}
+ <h2>Users</h2>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th> <th>Details</th> </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          {% if user.id !=1%}
+          <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td> <td>{{ user.notes }}</td> </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+{% endblock %}

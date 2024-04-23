@@ -1,0 +1,28 @@
+{% extends 'admin_dashboard.html' %}
+{% block title %}AI hospital Data{% endblock %}
+{% block content %}
+ <h2>AI Doctor Results Of Each Patient</h2>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Patient ID</th>
+            <th>Username</th>
+            <th>Email</th> <th>Entry ID</th><th>Diseases</th> <th>Descriptions</th><th>Precautions</th>
+            <th>Medications</th><th>workouts</th><th>Diets</th><th>DateTime</th></tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          {% if user.id !=1%}
+          {% for entry in entries %}
+          <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td> <td>{{entry.id}}</td><td>{{ entry.disease }}</td><td>{{entry.description}}</td>
+            <td>{{entry.precaution}}</td><td>{{entry.medication}}</td><td>{{entry.workouts}}</td>
+            <td>{{entry.diet}}</td><td>{{entry.date}}</td></tr>
+          {% endfor %}
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+{% endblock %}

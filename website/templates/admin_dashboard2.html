@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 col-sm-12">
+      <h1 class="text-left">Admin Dashboard</h1> </div>
+    <div class="col-md-9 col-sm-12">
+      <h2>Users</h2>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th> <th>Details</th> </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+              <ul>
+                {% for entry in user.ai_doctor_data %}
+                <li>
+                  <b>Disease:</b> {{ entry.disease }}<br>
+                  <b>Description:</b> {{ entry.description }}<br>
+                </li>
+                {% endfor %}
+              </ul>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div id="mapholder" style="width: 100%; height: 500px;"></div> </div>
+  </div>
+</div>
+
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script>
+function showPosition() {
+  fetch('/get_locations') // Assuming you have a route to get user locations
+    .then(response => response.json())
+    .then(users => {
+      var mapOptions = {
+        center: new google.maps.LatLng(users[0].latitude, users[0].longitude),
+        zoom: 14,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false,
+        navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL}
+      };
+      var map = new google.maps.Map(document.getElementById("mapholder"), mapOptions);
+
+      users.forEach(user => {
+        var latlon = new google.maps.LatLng(user.latitude, user.longitude);
+        var marker = new google.maps.Marker({
+          position: latlon,
+          map: map,
+          title: user.username
+        });
+        var infowindow = new google.maps.InfoWindow({
+          content: `
+            <b>Username:</b> ${user.username}<br>
+            <b>Email:</b> ${user.email}<br>
+            <b>Details:</b> ${user.details}  `
+        });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+      });
+    });
+}
+
+showPosition();
+</script>
+{% endblock %}
