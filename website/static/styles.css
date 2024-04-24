@@ -3,3 +3,23 @@
       }
       .navbar {
         background-color: #343a40 !important; /* This is the original color of the navbar.
+
+        }
+        body {
+  font-family: sans-serif;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+th {
+  text-align: left;
+  background-color: #f2f2f2;
+}

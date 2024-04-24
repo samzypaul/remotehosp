@@ -35,19 +35,22 @@
         }
 
       body {
-        background: linear-gradient(to bottom, #d2d3ce 50px, #ADD8E6 ); /* Change the colors and pixel values as needed */
+        background: linear-gradient(135deg, #71b7e6, #9b59b6 ); /* Change the colors and pixel values as needed */
       }
-      .navbar {
-          background-color: blue; /* Changes the color to blue */
+      .navbar-custom{
+          background-color:#123456;  /* Changes the color to blue */
           padding: 20px 0; /* Increases the size of the navbar */
         }
+        .nav-item.active {
+    border-bottom: 2px solid white;  /* White underline */
+}
     </style>
 
 
     <title>{% block title %}Home{% endblock %}</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom:50px,background-color:blue">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom" style="margin-bottom:50px,">
       <button
         class="navbar-toggler"
         type="button"
@@ -60,7 +63,7 @@
         <div class="navbar-nav">
 
       <div class="logo" >
-            <img class="myimg" src="{{ url_for('static', filename='img.png') }}" alt="">
+            <img class="myimg" src="{{ url_for('static', filename='logo.jpg') }}" alt="">
         </div>
 
 
@@ -70,6 +73,8 @@
             {% if user.id==1 %}
               <a class="navbar-brand" href="#" style="margin-left:45px">Health Admin Dashboard</a>
             {% endif %}
+
+
           <a class="nav-item nav-link" id="home" href="/ "  style="margin-left:50px">Home</a>
 
                       {% if user.id==1 %}
@@ -80,7 +85,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="/users">Users</a>
+        <a class="nav-link" href="/users">Patients</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/diseases">Diseases</a>
@@ -99,7 +104,7 @@
           {% endif %}
           <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
           {% else %}
-          <a class="nav-item nav-link" id="login" href="/login">Login</a>
+          <a class="nav-item nav-link" id="login" href="/login"  style="margin-left:45px">Login</a>
           <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
           {% endif %}
 

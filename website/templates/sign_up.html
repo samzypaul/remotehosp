@@ -1,7 +1,9 @@
 {% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block
 content %}
-<form method="POST">
+
+<div class="container my-4 mt-4" style="background: rgb(75, 131, 196); color: white; border-radius: 15px; padding: 40px;">
   <h3 align="center">Sign Up</h3>
+<form method="POST">
   <div class="form-group">
     <label for="username">Username</label>
     <input
@@ -75,4 +77,5 @@ content %}
   <br />
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>
 {% endblock %}
